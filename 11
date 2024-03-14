@@ -1,59 +1,27 @@
 import java.util.Scanner;
 
-public class Main
-{
-	public static void main(String[] args) {
-	    Scanner scanner = new Scanner(System.in);
-	    
-	    int money = scanner.nextInt();
-	    
-	    int fifty_thousand = money / 50000;
-		int ten_thousand = (money % 50000) / 10000;
-		int one_thousand = (money % 10000) / 1000;
-		int five_hundred = (money % 1000) / 500;
-		int one_hundred = (money % 500) / 100;
-		int fifty = (money % 100) / 50;
-		int ten = (money % 50) / 10;
-		int one = (money % 10);
-	    
-	    if (fifty_thousand == 1)
-		    System.out.println(fifty_thousand + " 50,000won bill");
-		else if (fifty_thousand > 1)
-		    System.out.println(fifty_thousand + " 50,000won bill(s)");
-		    
-		if (ten_thousand == 1)
-		    System.out.println(ten_thousand + " 10,000won bill");
-		else if (ten_thousand > 1)
-		    System.out.println(ten_thousand + " 10,000won bill(s)");
+public class Main {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
 
-		if (one_thousand == 1)
-		    System.out.println(one_thousand + " 1,000won bill");
-		else if (one_thousand > 1)
-		    System.out.println(one_thousand + " 1,000won bill(s)");
-		
-		if (five_hundred == 1)
-		    System.out.println(five_hundred + " 500won coin");
-		else if (five_hundred > 1)
-		    System.out.println(five_hundred + " 500won coin(s)");
-		    
-		if (one_hundred == 1)
-		    System.out.println(one_hundred + " 100won coin");
-		else if (one_hundred > 1)
-		    System.out.println(one_hundred + " 100won coin(s)");
-		
-		if (fifty == 1)
-		    System.out.println(fifty + " 50won coin");
-		else if (fifty > 1)
-		    System.out.println(fifty + " 50won coin(s)");
-		
-		if (ten == 1)
-		    System.out.println(ten + " 10won coin");
-		else if (ten > 1)
-		    System.out.println(ten + " 10won coin(s)");
-		
-		if (one == 1)
-		    System.out.println(one + " 1won coin");
-		else if (one > 1)
-		    System.out.println(one + " 1won coin(s)");
-	}
+        int money = scanner.nextInt();
+
+        int[] price = {50000, 10000, 1000, 500, 100, 50, 10, 1};
+        String[] priceNames = {"50,000won bill", "10,000won bill", "1,000won bill", "500won coin",
+                "100won coin", "50won coin", "10won coin", "1won coin"};
+
+        StringBuilder result = new StringBuilder();
+
+        for (int i = 0; i < price.length; i++) {
+            int count = money / price[i];
+            money %= price[i];
+            if (count > 0) {
+                result.append(count).append(" ").append(priceNames[i]);
+                if (count > 1) result.append("(s)");
+                result.append("\n");
+            }
+        }
+
+        System.out.println(result.toString());
+    }
 }
